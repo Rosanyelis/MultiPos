@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('monedas', function (Blueprint $table) {
             $table->id();
+            $table->string('abreviatura');
+            $table->string('descripcion');
+            $table->string('decimales');
+            $table->string('simbolo');
+            $table->enum('estatus', ['1','0']);
             $table->timestamps();
         });
     }

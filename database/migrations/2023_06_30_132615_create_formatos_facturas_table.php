@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compras', function (Blueprint $table) {
+        Schema::create('formatos_facturas', function (Blueprint $table) {
             $table->id();
+            $table->string('tipo');
+            $table->string('modelo');
+            $table->string('tam_ancho');
+            $table->string('tam_largo');
+            $table->enum('estatus', ['1','0']);
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compras');
+        Schema::dropIfExists('formatos_facturas');
     }
 };

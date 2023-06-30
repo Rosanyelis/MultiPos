@@ -241,10 +241,11 @@
                                     <span>Configuraciones</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="javascript: void(0);">Administración</a></li>
-                                    <li><a href="javascript: void(0);">Usuarios</a></li>
-                                    <li><a href="javascript: void(0);">Empresa</a></li>
-                                    <li><a href="javascript: void(0);">Monedas</a></li>
+                                    <li><a href="{{ route('folio.index') }}">Folios</a></li>
+                                    <li><a href="{{ route('moneda.index') }}">Monedas</a></li>
+                                    <li><a href="{{ route('mediospago.index') }}">Medios de Pago</a></li>
+                                    <li><a href="{{ route('esquema.index') }}">Esquemas</a></li>
+                                    <li><a href="javascript: void(0);">Formato Facturas</a></li>
                                 </ul>
                             </li>
 

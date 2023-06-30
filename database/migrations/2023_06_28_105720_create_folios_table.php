@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('folios', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
+            $table->string('tipo');
+            $table->enum('estatus', ['1','0']);
             $table->timestamps();
         });
     }

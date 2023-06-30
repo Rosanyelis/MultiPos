@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Folio;
+use App\Models\MediosPago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-
-class FolioController extends Controller
+class MediosPagoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        $data = Folio::all();
-        return view('folio.index', [
-            'folios' => $data,
+        $data = MediosPago::all();
+        return view('mediospagos.index', [
+            'mediospagos' => $data,
         ]);
     }
 
@@ -26,7 +25,7 @@ class FolioController extends Controller
      */
     public function create(): View
     {
-        return view('folio.create');
+        return view('mediospagos.create');
     }
 
     /**
@@ -35,27 +34,25 @@ class FolioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codigo' => ['required'],
-            'tipo' => ['required', 'unique:folios'],
+            'tipo' => ['required'],
         ],
         [
-            'codigo.required' => 'El campo Código de Folio es obligatorio',
-            'tipo.required' => 'El campo Tipo de Folio es obligatorio',
+            'tipo.required' => 'El campo Medio de Pago es obligatorio',
+            'tipo.unique' => 'El Medio de Pago ya existe',
         ]);
 
-        $folio = new Folio();
-        $folio->codigo = $request->codigo;
-        $folio->tipo = $request->tipo;
-        $folio->estatus = '1';
-        $folio->save();
+        $medio = new MediosPago();
+        $medio->tipo = $request->tipo;
+        $medio->estatus = '1';
+        $medio->save();
 
-        return Redirect::route('folio.index')->with('success', 'Folio Registrado Exitósamente.');
+        return Redirect::route('mediospago.index')->with('success', 'Medio de Pago Registrado Exitósamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Folio $folio)
+    public function show(MediosPago $mediosPago)
     {
         //
     }
@@ -63,7 +60,7 @@ class FolioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Folio $folio)
+    public function edit(MediosPago $mediosPago)
     {
         //
     }
@@ -71,7 +68,7 @@ class FolioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Folio $folio)
+    public function update(Request $request, MediosPago $mediosPago)
     {
         //
     }
@@ -79,7 +76,7 @@ class FolioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Folio $folio)
+    public function destroy(MediosPago $mediosPago)
     {
         //
     }
