@@ -1,16 +1,1 @@
-/*
-Template Name: Upcube -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
-File: Session Timeout Js File
-*/
-
-$.sessionTimeout({
-	keepAliveUrl: 'pages-starter.html',
-	logoutButton:'Logout',
-	logoutUrl: 'auth-login.html',
-	redirUrl: 'auth-lock-screen.html',
-	warnAfter: 3000,
-	redirAfter: 30000,
-	countdownMessage: 'Redirecting in {timer} seconds.'
-});
+$.sessionTimeout({keepAliveUrl:"pages-starter.html",logoutButton:"Logout",logoutUrl:"auth-login.html",redirUrl:"auth-lock-screen.html",warnAfter:3e3,redirAfter:3e4,countdownMessage:"Redirecting in {timer} seconds."});

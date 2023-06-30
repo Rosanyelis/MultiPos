@@ -1,36 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta charset="utf-8" />
+        <title>Dashboard | MultiPos</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Bootstrap Css -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @yield('styles')
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+
+    <body data-topbar="dark">
+    
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+                @yield('contenido')
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                @include('layouts.footer')
+            </div>
+            <!-- end main content-->
+
         </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+        @yield('scripts')
     </body>
 </html>
