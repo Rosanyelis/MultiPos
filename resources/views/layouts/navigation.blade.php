@@ -245,6 +245,8 @@
                                     <li><a href="{{ route('moneda.index') }}">Monedas</a></li>
                                     <li><a href="{{ route('mediospago.index') }}">Medios de Pago</a></li>
                                     <li><a href="{{ route('esquema.index') }}">Esquemas</a></li>
+                                    <li><a href="{{ route('grupo.index') }}">Grupos</a></li>
+                                    <li><a href="javascript: void(0);">Subgrupos</a></li>
                                     <li><a href="javascript: void(0);">Formato Facturas</a></li>
                                 </ul>
                             </li>

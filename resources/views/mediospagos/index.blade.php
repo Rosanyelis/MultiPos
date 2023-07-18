@@ -47,8 +47,6 @@
                                         <th width="80px"></th>
                                     </tr>
                                 </thead>
-
-
                                 <tbody>
                                     @foreach ($mediospagos as $medio)
                                     <tr>
@@ -61,8 +59,35 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-link p-1" href="javascript:;"><i class="fas fa-edit"></i> </a>
-                                            <a class="btn btn-link p-1 text-danger" href="javascript:;"><i class="fas fa-trash"></i> </a>
+                                            <a class="btn btn-link p-1" href="{{ route('mediospago.edit', $medio->id) }}"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            @if ($medio->estatus == '1')
+                                                <button type="button" class="btn btn-link p-1 text-danger"
+                                                    id="deleteRegistry" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Desactivar"  onclick="deleteRegistry('formDelete-{{ $medio->id }}')">
+                                                    <i class="fas fa-lock"></i>
+                                                </button>
+                                                <form id="formDelete-{{ $medio->id }}"
+                                                    action="{{ route('mediospago.destroy', $medio->id) }}" method="POST">
+                                                    @csrf
+                                                </form>
+                                            @endif
+
+                                            @if ($medio->estatus == '0')
+                                                <button type="button" class="btn btn-link p-1 text-success"
+                                                    id="activateRegistry" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Activar"
+                                                    onclick="activeRegistry('formActivate-{{ $medio->id }}')">
+                                                    <i class="fas fa-lock-open"></i>
+                                                </button>
+                                                <form id="formActivate-{{ $medio->id }}"
+                                                    action="{{ route('mediospago.active', $medio->id) }}" method="POST">
+                                                    @csrf
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -87,4 +112,40 @@
 
     <!-- Datatable init js -->
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
+     <!-- Sweet Alerts js -->
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script>
+        function ActiveRegistry(id) {
+            Swal.fire({
+                title: "Está Seguro de Activar el registro?",
+                text: "Al darlo de alta, podrá usarlo en otras funciones del sistema",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#1cbb8c",
+                cancelButtonColor: "#f32f53",
+                confirmButtonText: "Si, estoy seguro!"
+            }).then(function(result) {
+                let form = '#'+id;
+                if (result) {
+                    $(form).submit();    
+                }
+            });
+        }
+        function deleteRegistry(id) {
+            Swal.fire({
+                title: "Está Seguro de Dar de Baja el registro?",
+                text: "Al darlo de baja, no podra usarlo en otras funciones del sistema",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#1cbb8c",
+                cancelButtonColor: "#f32f53",
+                confirmButtonText: "Si, estoy seguro!"
+            }).then(function(result) {
+                if (result) {
+                    let form = '#'+id;
+                    $(form).submit();
+                }
+            });
+        }
+    </script>
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Folios
+    Grupos
 @endsection
 @section('styles')
     <!-- DataTables -->
@@ -19,12 +19,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Folios</h4>
+                        <h4 class="mb-sm-0">Grupos</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Configuraciones</a></li>
-                                <li class="breadcrumb-item active">Folios</li>
+                                <li class="breadcrumb-item active">Grupos</li>
                             </ol>
                         </div>
 
@@ -37,15 +37,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-row-reverse mb-3">
-                                <a href="{{ route('folio.create') }}" class="btn btn-primary waves-effect waves-light">Nuevo Folio</a>
+                                <a href="{{ route('grupo.create') }}" class="btn btn-primary waves-effect waves-light">Nuevo grupo</a>
                             </div>
                             
                             <table id="datatable" class="table table-sm table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>Código</th>
-                                        <th>Tipo</th>
+                                        <th>Grupo</th>
                                         <th>Estatus</th>
                                         <th width="80px"></th>
                                     </tr>
@@ -53,44 +52,43 @@
 
 
                                 <tbody>
-                                    @foreach ($folios as $folio)
+                                    @foreach ($grupos as $grupo)
                                     <tr>
-                                        <td>{{ $folio->codigo }}</td>
-                                        <td>{{ $folio->tipo }}</td>
+                                        <td>{{ $grupo->nombre }}</td>
                                         <td>
-                                            @if ($folio->estatus == 1)
+                                            @if ($grupo->estatus == 1)
                                             <span class="badge bg-success">Activo</span>
                                             @else
                                             <span class="badge bg-danger">Inactivo</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-link p-1" href="{{ route('folio.edit', $folio->id) }}"
+                                            <a class="btn btn-link p-1" href="{{ route('grupo.edit', $grupo->id) }}"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
-                                            @if ($folio->estatus == '1')
+                                            @if ($grupo->estatus == '1')
                                                 <button type="button" class="btn btn-link p-1 text-danger"
                                                     id="deleteRegistry" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Desactivar"  onclick="deleteRegistry('formDelete-{{ $folio->id }}')">
+                                                    title="Desactivar"  onclick="deleteRegistry('formDelete-{{ $grupo->id }}')">
                                                     <i class="fas fa-lock"></i>
                                                 </button>
-                                                <form id="formDelete-{{ $folio->id }}"
-                                                    action="{{ route('folio.destroy', $folio->id) }}" method="POST">
+                                                <form id="formDelete-{{ $grupo->id }}"
+                                                    action="{{ route('grupo.destroy', $grupo->id) }}" method="POST">
                                                     @csrf
                                                 </form>
                                             @endif
 
-                                            @if ($folio->estatus == '0')
+                                            @if ($grupo->estatus == '0')
                                                 <button type="button" class="btn btn-link p-1 text-success"
                                                     id="activateRegistry" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Activar"
-                                                    onclick="ActiveRegistry('formActivate-{{ $folio->id }}')">
+                                                    onclick="ActiveRegistry('formActivate-{{ $grupo->id }}')">
                                                     <i class="fas fa-lock-open"></i>
                                                 </button>
-                                                <form id="formActivate-{{ $folio->id }}"
-                                                    action="{{ route('folio.active', $folio->id) }}" method="POST">
+                                                <form id="formActivate-{{ $grupo->id }}"
+                                                    action="{{ route('grupo.active', $grupo->id) }}" method="POST">
                                                     @csrf
                                                 </form>
                                             @endif

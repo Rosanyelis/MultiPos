@@ -41,14 +41,29 @@
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Código *</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="codigo" placeholder="Ejem: VENT"
-                                        id="example-text-input">
+                                        id="example-text-input" value="{{ old('codigo') }}">
+                                    @if ($errors->has('codigo'))
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5" aria-hidden="false">
+                                        <li class="parsley-required">
+                                            {{ $errors->first('codigo') }}
+                                        </li>
+                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Tipo *</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="tipo"
-                                        placeholder="Ejem: Folio de Venta" id="example-text-input">
+                                        placeholder="Ejem: Folio de Venta" id="example-text-input"
+                                        value="{{ old('tipo') }}">
+                                    @if ($errors->has('tipo'))
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5" aria-hidden="false">
+                                        <li class="parsley-required">
+                                            {{ $errors->first('tipo') }}
+                                        </li>
+                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="d-flex flex-row-reverse">

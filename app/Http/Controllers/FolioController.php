@@ -53,19 +53,17 @@ class FolioController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Folio $folio)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Folio $folio)
+    public function edit($id)
     {
-        //
+        $count = Folio::where('id', $id)->count();
+        if ($count) {
+            $data = Folio::find($id);
+            return view('folio.edit', ['data' => $data]);
+        }else {
+            return Redirect::route('folio.index')->with('error', 'Problemas para mostrar el registro.');
+        }
     }
 
     /**
@@ -73,14 +71,63 @@ class FolioController extends Controller
      */
     public function update(Request $request, Folio $folio)
     {
-        //
+        $count = Folio::where('id', $id)->count();
+            if ($count) {
+                $request->validate([
+                'codigo' => ['required'],
+                'tipo' => ['required'],
+            ],
+            [
+                'codigo.required' => 'El campo Código de Folio es obligatorio',
+                'tipo.required' => 'El campo Tipo de Folio es obligatorio',
+            ]);
+
+            $folio = Folio::find($id);
+            $folio->codigo = $request->codigo;
+            $folio->tipo = $request->tipo;
+            $folio->save();
+
+            return Redirect::route('folio.index')->with('success', 'Folio Actualizado Exitósamente.');
+        }else {
+            return Redirect::route('folio.index')->with('error', 'Problemas para mostrar el registro.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Folio $folio)
+     public function destroy($id)
     {
-        //
+        $count = Folio::where('id', $id)->count();
+
+        if ($count>0) {
+
+            $folio = Folio::find($id);
+            $folio->estatus = '0'; 
+            $folio->save();
+
+            return Redirect::route('folio.index')->with('success', 'Folio Desactivado Exitósamente.');
+        } else {
+            return Redirect::route('folio.index')->with('error', 'Problemas con el registro.');
+        }
+    }
+
+    /**
+     * Active the specified resource from storage.
+     */
+    public function active($id)
+    {
+        $count = Folio::where('id', $id)->count();
+
+        if ($count>0) {
+
+            $folio = Folio::find($id);
+            $folio->estatus = '1'; 
+            $folio->save();
+            
+            return Redirect::route('folio.index')->with('success', 'Folio Activado Exitósamente.');
+        } else {
+            return Redirect::route('folio.index')->with('error', 'Problemas con el registro.');
+        }
     }
 }

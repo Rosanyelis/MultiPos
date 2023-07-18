@@ -38,31 +38,60 @@
                         <form action="{{ route('moneda.store') }}" method="POST">
                             @csrf
                             <div class="row mb-3">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Abreviatura *</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label @error('abreviatura') parsley-error @enderror">Abreviatura *</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="abreviatura" placeholder="Ejem: USD"
-                                        id="example-text-input">
+                                        id="example-text-input" value="{{ old('abreviatura') }}">
+                                    @if ($errors->has('abreviatura'))
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5" aria-hidden="false">
+                                        <li class="parsley-required">
+                                            {{ $errors->first('abreviatura') }}
+                                        </li>
+                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Descripción *</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="descripcion"
-                                        placeholder="Ejem: Dólares" id="example-text-input">
+                                        placeholder="Ejem: Dólares" id="example-text-input"
+                                        value="{{ old('descripcion') }}">
+                                    @if ($errors->has('descripcion'))
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5" aria-hidden="false">
+                                        <li class="parsley-required">
+                                            {{ $errors->first('descripcion') }}
+                                        </li>
+                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Cantidad de Décimales *</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="decimales"
-                                        placeholder="Ejem: 2" id="example-text-input">
+                                        placeholder="Ejem: 2" id="example-text-input" value="{{ old('decimales') }}">
+                                    @if ($errors->has('decimales'))
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5" aria-hidden="false">
+                                        <li class="parsley-required">
+                                            {{ $errors->first('decimales') }}
+                                        </li>
+                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Símbolo *</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="simbolo"
-                                        placeholder="Ejem: $" id="example-text-input">
+                                        placeholder="Ejem: $" id="example-text-input" value="{{ old('simbolo') }}">
+                                    @if ($errors->has('simbolo'))
+                                    <ul class="parsley-errors-list filled" id="parsley-id-5" aria-hidden="false">
+                                        <li class="parsley-required">
+                                            {{ $errors->first('simbolo') }}
+                                        </li>
+                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="d-flex flex-row-reverse">
